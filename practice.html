@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css", rel="stylesheet">
+    <script src="C:\Users\CJH\Desktop\Capstone_Map\node_modules\chart.js\dist\Chart.js"></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=368cbd36dadbf4ad8c1a657b33af0907"></script>
+    <title>Practice</title>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx,{
+            type: 'radar',
+            data:{
+                labels:['1','2','3','4','5'],
+                datasets: [{
+                    data:[1,2,3,4,5]
+                }]
+            }
+        })
+    </script>
+</body>
+</html>
