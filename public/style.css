@@ -3,3 +3,13 @@ body {
   height: 100%;
   width: 100%;
 }
+#map {
+  height: 50%;
+  width: 100%;
+  display: flex;
+}
+#chartContainer {
+  margin-top: 2%;
+  height: 45%;
+  width: 40%;
+}

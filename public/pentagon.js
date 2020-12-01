@@ -16,7 +16,8 @@ function pentagon(C, S, R, T, P)
             [{
                 label: '점수',
                 data: [Con, Safety, Res, Tra, Play],
-                pointStyle: 'star'
+                pointStyle: 'star',
+                backgroundColor : 'rgba(168, 100, 255, 0.3)'
             }]
         },
         options: 
@@ -24,7 +25,7 @@ function pentagon(C, S, R, T, P)
             scale: 
             {
                 ticks: {max : 5, min : 0, stepSize : 1},
-                pointLabels : { fontSize : 11.5, fontStyle : 'bold'}
+                pointLabels : { fontSize : 13, fontStyle : 'bold'}
             }
         }
     });
