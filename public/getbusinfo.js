@@ -31,7 +31,7 @@ request({
         }
         jsonData = JSON.stringify(busArray);
         //console.log(jsonData);
-        fs.writeFileSync("./public/BUSSTOP_INFO.json",jsonData)
+        fs.writeFileSync("./BUSSTOP_INFO.json",jsonData)
         console.log("버스 정류장 번호, 이름, 경/위도 저장")
     }
 );
