@@ -1,3 +1,6 @@
+// node server.js 입력시 서버 실행 (node.js 설치 필요)
+// http://localhost:8080 입력
+
 const express = require("express");
 const { response } = require("express");
 const server = express();

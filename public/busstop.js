@@ -1,11 +1,11 @@
-function BUS_STATION_INFO_INIT()
+function BUS_STATION_INFO_INIT() // BUSSTOP_INFO.json 파일 불러오는 함수
 {
     loadJSON(function(response){
-        BUSSTOP_JSON = JSON.parse(response);
+        BUSSTOP_JSON = JSON.parse(response); // 전역변수로 선언됨
     });
 }
 
-function loadJSON(callback)
+function loadJSON(callback) // BUSSTOP_INFO.json 파일 불러오는 함수
 {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -18,8 +18,6 @@ function loadJSON(callback)
         }
     };
     xobj.send(null);
-    console.log('r' + xobj.readyState);
-    console.log('s' + xobj.status);
 }
 
 function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거리 계산하는 함수
@@ -43,9 +41,10 @@ function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거�
 
   return d*1000; // m로 retrun
 }
-function count_bus(mouse_lat, mouse_long)
+
+function count_BUSSTOP(mouse_lat, mouse_long) // 주변의 버스 정류장의 수를 카운트 하는 함수. 매개변수는 경위도.
 {
-    var count_100 = 0;
+    var count_100 = 0; // count_100/200/500 : 해당 거리 반경 내의 버스정류장 수
     var count_200 = 0;
     var count_500 = 0;
     var distance = 0;
@@ -57,7 +56,7 @@ function count_bus(mouse_lat, mouse_long)
         if (distance <= 200) count_200++;
         if (distance <= 500) count_500++;
     }
-    console.log(count_100);
+    console.log(count_100); // 콘솔창에서 확인 가능
     console.log(count_200);
     console.log(count_500);
 }

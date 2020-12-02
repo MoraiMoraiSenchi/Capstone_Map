@@ -1,3 +1,7 @@
+// 공공데이터 API를 이용하여 광주 시내버스 정류장 정보 얻어오는 스크립트
+// node getbusinfo.js 입력시 public 폴더 내에 BUSSTOP_INFO.js 파일 생성 (혹은 갱신)
+// API에서 제공하는 정보는 버스 정류장의 ID/이름/번호/경위도/영문이름 등등이 있는데 거기서 이름/번호/경위도만 추출 후 저장함.
+
 const { json } = require('express');
 const fs = require('fs');
 
