@@ -22,11 +22,6 @@ function loadJSON(callback)
     console.log('s' + xobj.status);
 }
 
-// const fs = require('fs');
-// const dataBuffer = fs.readFileSync('BUSSTOP_INFO.json');
-// const dataJSON = dataBuffer.toString()
-// const BUSSTOP = JSON.parse(dataJSON)
-
 function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거리 계산하는 함수
 {
   function deg2rad(deg) 
@@ -48,7 +43,6 @@ function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거�
 
   return d*1000; // m로 retrun
 }
-
 function count_bus(mouse_lat, mouse_long)
 {
     var count_100 = 0;
