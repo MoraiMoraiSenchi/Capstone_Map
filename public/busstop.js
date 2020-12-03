@@ -56,7 +56,7 @@ function count_BUSSTOP(mouse_lat, mouse_long) // 주변의 버스 정류장의 �
         if (distance <= 200) count_200++;
         if (distance <= 500) count_500++;
     }
-    console.log(count_100); // 콘솔창에서 확인 가능
-    console.log(count_200);
-    console.log(count_500);
+    // console.log(count_100); // 콘솔창에서 확인 가능
+    // console.log(count_200);
+    // console.log(count_500);
 }
