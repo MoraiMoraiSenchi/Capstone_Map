@@ -9,8 +9,9 @@
     <script src = "place.js"></script>
     <script src ="pentagon.js"></script> <!-- 오각형 그래프 정의된 js파일-->
     <script src ="circle.js"></script> <!-- 원 나타내는 js파일-->
-    <script src = "busstop.js"></script> <!-- 버스 정류장 개수 세는 js파일-->
-    <script src = "BUSSTOP_INFO.json"></script> <!-- 버스 정류장 데이터-->
+    <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
+    <script src = "BUSSTOP_INFO.json"></script> <!-- 버스 정류장 json 데이터-->
+    <script src = "CCTV_INFO.json"></script> <!-- CCTV json 데이터-->
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=368cbd36dadbf4ad8c1a657b33af0907&libraries=services"></script>
     <link href="style.css", rel="stylesheet">
 </head>
@@ -21,7 +22,7 @@
         <canvas id="myChart"></canvas>
     </div>
     <script>
-        BUS_STATION_INFO_INIT();
+        BUS_STATION_CCTV_INFO_INIT();
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(35.17690999613079, 126.90610797027583), // 지도의 중심좌표
@@ -29,33 +30,6 @@
             };
         var Con = 1, Safety = 2, Res = 3, Tra = 4, Play = 5; // 그래프에 사용할 변수
         var clicked_position = new kakao.maps.LatLng(0,0); // 클릭한 위치
-
-        /*// 편리, 안전, 먹거리, 교통성, 놀거리
-        var ConPositions = [
-            new kakao.maps.Latlng(35.176551,126.914369),
-            new kakao.maps.Latlng(35.1774245251983, 126.9125344852337),
-            new kakao.maps.Latlng(35.17655360881876, 126.91436558074881)
-        ];
-        var SafetyPositions = [
-            new kakao.maps.Latlng(35.177959926711594, 126.91564783414019),
-            new kakao.maps.Latlng(35.17705140778769, 126.91575680603532)
-        ];
-        var ResPositions = [
-            new kakao.maps.Latlng(35.17701032109675, 126.91386242844095),
-            new kakao.maps.Latlng(35.175553629661, 126.91320250743476),
-            new kakao.maps.latlng(35.17724685071248, 126.91274726779886),
-            new kakao.maps.latlng(35.17857238301141, 126.91245265167346)
-        ];
-        var TraPositions = [
-            new kakao.maps.Latlng(35.178238970347365, 126.91222109645787),
-            new kakao.maps.Latlng(35.1787852621088, 126.91200337298642),
-            new kakao.maps.Latlng(35.1751940125879, 126.91249258904936)
-        ];
-        var PlayPositions = [
-            new kakao.maps.Latlng(35.17729786345574, 126.91400411609261),
-            new kakao.maps.Latlng(35.175605165279634, 126.91381694668334),
-            new kakao.maps.Latlng(35.176590895708095, 126.9146451330799)
-        ];*/
 
         // 지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -76,6 +50,7 @@
             count_BUSSTOP(latlng.getLat(), latlng.getLng()) // 
             //console.log(latlng);
             findCafe(latlng, function(x){console.log(x)});
+
         });
     </script>
 </body>

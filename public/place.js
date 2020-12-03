@@ -9,5 +9,5 @@ function findCafe(latlng, cb)
         }
     };
 
-    places.keywordSearch('카페', callback, { location : latlng, radius : 100});
+    places.keywordSearch('원룸', callback, { location : latlng, radius : 100});
 }
