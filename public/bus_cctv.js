@@ -1,7 +1,7 @@
-function BUS_STATION_CCTV_INFO_INIT() // BUSSTOP_INFO.json 파일 불러오는 함수
+function BUS_STATION_CCTV_INFO_INIT() // BUSSTOP_INFO.json와 CCTV_INFO.json 파일 불러온 뒤 파싱하는 함수
 {
     loadBUS(function(response){
-        BUSSTOP_JSON = JSON.parse(response); // 전역변수로 선언됨
+        BUSSTOP_JSON = JSON.parse(response);
     });
     loadCCTV(function(response){
         CCTV_JSON = JSON.parse(response);
@@ -57,40 +57,56 @@ function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거�
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
 
-  return d*1000; // m로 retrun
+  return 1000*d; // retrun
 }
 
-function count_BUSSTOP(mouse_lat, mouse_long, m) // 주변의 버스 정류장의 수를 카운트 하는 함수. 매개변수는 경위도.
+function count_BUSSTOP_CCTV(mouse_lat, mouse_long, m) // 주변의 버스 정류장과 CCTV의 개수,거리를 카운트 하고 리턴하는 함수. 매개변수는 경위도.
 {
-    var count_100b = 0; // count_100/200/500 : 해당 거리 반경 내의 버스정류장 수
-    var count_200b = 0;
-    var count_500b = 0;
-    var distance_b = 0;
+    /* count_bus_cctv 설명
+        단순히 특정 반경 내 버스 정류장이나 CCTV 개수를 세는 것으로 점수를 내보니 조금 이상한 부분이 있음.
+        -> 버스 정류장과 CCTV의 거리를 점수에 반영해야함
+        count_bus_cctv[0]에는 반경 500m 이내의 버스정류장과 개수를 저장
+        count_bus_cctv[1]부터 버스 정류장의 개수와 CCTV의 거리를 저장함.
+    */
 
-    var count_100c = 0; // count_100/200/500 : 해당 거리 반경 내의 CCTV 수
-    var count_200c = 0;
-    var count_500c = 0;
-    var distance_c = 0;
+    var count_bus_cctv = new Array();
+    var i = 1;
+    var distance = 0;
+    var bus_index = 0; // 버스 정류장의 개수를 저장할 변수
 
     for (const key of BUSSTOP_JSON)
     {
-        distance_b = getDistanceFromLatLonInKm(key.LATITUDE, key.LONGITUDE, mouse_lat, mouse_long)
-        if(distance_b <= 100) count_100b++;
-        if (distance_b <= 200) count_200b++;
-        if (distance_b <= 500) count_500b++;
-    }
-    console.log("100미터 이내 버스 정류장 : ", count_100b); // 콘솔창에서 확인 가능
-    console.log("200미터 이내 버스 정류장 : ", count_200b);
-    console.log("500미터 이내 버스 정류장 : ", count_500b);
+        distance = getDistanceFromLatLonInKm(key.LATITUDE, key.LONGITUDE, mouse_lat, mouse_long)
+        if(distance <= 500) 
+        {
+            bus_index++;
+            count_bus_cctv[i] = distance;
+            i++;
 
+            // var marker = new kakao.maps.Marker({
+            //     map: map,
+            //     position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE)
+            // }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
+        }
+    }
     for (const key of CCTV_JSON)
     {
-        distance_c = getDistanceFromLatLonInKm(key.LATITUDE, key.LONGITUDE, mouse_lat, mouse_long)
-        if(distance_c <= 100) count_100c++;
-        if (distance_c <= 200) count_200c++;
-        if (distance_c <= 500) count_500c++;
+        distance = getDistanceFromLatLonInKm(key.LATITUDE, key.LONGITUDE, mouse_lat, mouse_long)
+        if(distance <= 500) 
+        {
+            count_bus_cctv[i] = distance;
+            i++;
+            
+            // var marker = new kakao.maps.Marker({
+            //     map: map,
+            //     position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE),
+            //     opacity : 0.5
+            // }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
+        }
     }
-    console.log("100미터 이내 CCTV : ", count_100c); // 콘솔창에서 확인 가능
-    console.log("200미터 이내 CCTV : ", count_200c);
-    console.log("500미터 이내 CCTV : ", count_500c);
+
+    count_bus_cctv[0] = [bus_index];
+    //console.log(count_bus_cctv);
+
+    return count_bus_cctv;
 }

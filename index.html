@@ -6,10 +6,11 @@
     <title>Capstone</title>
     <meta charset="utf-8">
     <script src="chart.js\dist\Chart.js"></script> <!-- 오각형 그래프에 사용할 js파일-->
-    <script src = "place.js"></script>
+    <script src = "place.js"></script> <!-- 키워드 검색하는 js파일-->
     <script src ="pentagon.js"></script> <!-- 오각형 그래프 정의된 js파일-->
     <script src ="circle.js"></script> <!-- 원 나타내는 js파일-->
     <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
+    <script src = "score.js"></script> <!-- 점수 내는 js 파일-->
     <script src = "BUSSTOP_INFO.json"></script> <!-- 버스 정류장 json 데이터-->
     <script src = "CCTV_INFO.json"></script> <!-- CCTV json 데이터-->
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=368cbd36dadbf4ad8c1a657b33af0907&libraries=services"></script>
@@ -30,27 +31,29 @@
             };
         var Con = 1, Safety = 2, Res = 3, Tra = 4, Play = 5; // 그래프에 사용할 변수
         var clicked_position = new kakao.maps.LatLng(0,0); // 클릭한 위치
+        var i = 0;
+        var bus_cctv_Array = new Array(); // 각 함수들의 리턴값 저장할 함수
 
-        // 지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption);
-        
-        // 지도에 원을 표시합니다
-        make_Circle(map);
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+        make_Circle(map); // 지도에 원을 표시합니다
 
         // 지도에 클릭 이벤트를 등록합니다
         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
         
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            var latlng = mouseEvent.latLng;
-            clicked_position = latlng
-            pentagon(Con, Safety, Res, Tra, Play); // 오각형 그래프 표현하는 함수
-            draw_Circle(latlng); // 마커 위치를 클릭한 위치로 옮깁니다
-            count_BUSSTOP(latlng.getLat(), latlng.getLng()) // 
-            //console.log(latlng);
-            findCafe(latlng, function(x){console.log(x)});
+            var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
+            clicked_position = latlng // 클릭한 위치에 위도 경도 대입
 
+            draw_Circle(latlng); // 100/200/500 반경 원 생성
+
+            bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
+
+            Tra = TRA_score(bus_cctv_Array);
+            //console.log(latlng);
+            //findCafe(latlng, function(x){console.log(x)});
+
+            pentagon(Con, Safety, Res, Tra, Play); // 오각형 그래프 표현하는 함수
         });
     </script>
 </body>
