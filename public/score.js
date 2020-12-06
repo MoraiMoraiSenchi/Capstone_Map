@@ -27,8 +27,6 @@ function SAFETY_score(bcArr)
     }
 
     if(score > 5) score = 5;
-    console.log('Safey : ', score);
-
 
     score = Number.parseFloat(score).toFixed(1);
     return score;

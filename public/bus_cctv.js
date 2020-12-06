@@ -97,11 +97,11 @@ function count_BUSSTOP_CCTV(mouse_lat, mouse_long) // 주변의 버스 정류장
             count_bus_cctv[i] = distance;
             i++;
 
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE),
-                opacity : 0.5
-            }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
+            // var marker = new kakao.maps.Marker({
+            //     map: map,
+            //     position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE),
+            //     opacity : 0.5
+            // }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
         }
     }
 
