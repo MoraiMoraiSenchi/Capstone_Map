@@ -29,7 +29,8 @@
                 center: new kakao.maps.LatLng(35.17690999613079, 126.90610797027583), // 지도의 중심좌표
                 level: 5 // 지도의 확대 레벨
             };
-        var Con = 1, Safety = 2, Res = 3, Tra = 4, Play = 5; // 그래프에 사용할 변수
+        
+        var Con = 0, Safety = 0, Res = 0, Tra = 0, Play = 0; // 그래프에 사용할 변수
         var clicked_position = new kakao.maps.LatLng(0,0); // 클릭한 위치
         var i = 0;
         var bus_cctv_Array = new Array(); // 각 함수들의 리턴값 저장할 함수
@@ -50,10 +51,18 @@
             bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
 
             Tra = TRA_score(bus_cctv_Array);
-            //console.log(latlng);
-            //findCafe(latlng, function(x){console.log(x)});
+            Safety = SAFETY_score(bus_cctv_Array);
+            
+            findRes(latlng,function(x){Res = x;});
+            findCon(latlng,function(x){Con = x;});
+            findPlay(latlng,function(x){Play = x});
+            findBar(latlng,function(x){
+                Safety -= x
+                if(Safety < 0) Safety = 0;
+            });
 
-            pentagon(Con, Safety, Res, Tra, Play); // 오각형 그래프 표현하는 함수
+            setTimeout(function(){pentagon(Con, Safety, Res, Tra, Play);}, 300);
+             // 오각형 그래프 표현하는 함수
         });
     </script>
 </body>

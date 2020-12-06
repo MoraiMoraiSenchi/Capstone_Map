@@ -1,4 +1,4 @@
-function pentagon(C, S, R, T, P)
+var pp = function(C, S, R, T, P)
 {
     let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -7,7 +7,8 @@ function pentagon(C, S, R, T, P)
     Res = R;
     Tra = T;
     Play = P;
-
+    var callback = function(){
+        
     let radarChart = new Chart(myChart, {
         type: 'radar',
         data: {
@@ -29,4 +30,6 @@ function pentagon(C, S, R, T, P)
             }
         }
     });
- }
+    }
+
+}

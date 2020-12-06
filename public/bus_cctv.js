@@ -60,7 +60,7 @@ function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) // 경위도로 거�
   return 1000*d; // retrun
 }
 
-function count_BUSSTOP_CCTV(mouse_lat, mouse_long, m) // 주변의 버스 정류장과 CCTV의 개수,거리를 카운트 하고 리턴하는 함수. 매개변수는 경위도.
+function count_BUSSTOP_CCTV(mouse_lat, mouse_long) // 주변의 버스 정류장과 CCTV의 개수,거리를 카운트 하고 리턴하는 함수. 매개변수는 경위도.
 {
     /* count_bus_cctv 설명
         단순히 특정 반경 내 버스 정류장이나 CCTV 개수를 세는 것으로 점수를 내보니 조금 이상한 부분이 있음.
@@ -96,12 +96,12 @@ function count_BUSSTOP_CCTV(mouse_lat, mouse_long, m) // 주변의 버스 정류
         {
             count_bus_cctv[i] = distance;
             i++;
-            
-            // var marker = new kakao.maps.Marker({
-            //     map: map,
-            //     position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE),
-            //     opacity : 0.5
-            // }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
+
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(key.LATITUDE, key.LONGITUDE),
+                opacity : 0.5
+            }); // 위치 마커로 확인하고 싶을 때 주석 해제할 것
         }
     }
 
