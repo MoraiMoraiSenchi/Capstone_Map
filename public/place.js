@@ -1,10 +1,7 @@
-var rad = new Array();
-
 function findRes(latlng, cb)
 {
     var places = new kakao.maps.services.Places();
     var score = 0;
-
     var callback = function(result, status, pagination){
         if (status === kakao.maps.services.Status.OK)
         {
@@ -14,7 +11,8 @@ function findRes(latlng, cb)
             }
             for (const key of result)
             {
-                score += (8/key.distance);
+                if(key.distance <= 20) score += 0.25;
+                else score += (8/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
@@ -39,38 +37,41 @@ function findCon(latlng, cb)
             }
             for (const key of result)
             {
-                if(key.category_group_code == 'CS2')
-                {
-                    score += (20/key.distance);
-                    
-                }
-                if(key.category_name == "가정,생활 > 슈퍼마켓")
-                {
-                    score += (15/key.distance);
-                }
-                if(key.category_name == "가정,생활 > 세탁소")
-                {
-                    score += (15/key.distance);
-                }
-                if(key.category_name == "가정,생활 > 미용 > 미용실")
-                {
-                    score += (10/key.distance);
-                }
-                if(key.category_name == "서비스,산업 > 전문대행 > 공간대여 > 스터디카페,스터디룸")
-                {
-                    score += (15/key.distance);
-                }
-                if(key.category_group_code == "BK9")
-                {
-                    score += (10/key.distance);
-                }
-                if(key.category_group_code == "HP8")
-                {
-                    score += (10/key.distance);
-                }
-                if(key.category_group_code == "PM9")
-                {
-                    score += (10/key.distance);
+                if(key.distance <= 20) score +=0.25;
+                else{
+                    if(key.category_group_code == 'CS2')
+                    {
+                        score += (20/key.distance);
+                        
+                    }
+                    if(key.category_name == "가정,생활 > 슈퍼마켓")
+                    {
+                        score += (15/key.distance);
+                    }
+                    if(key.category_name == "가정,생활 > 세탁소")
+                    {
+                        score += (15/key.distance);
+                    }
+                    if(key.category_name == "가정,생활 > 미용 > 미용실")
+                    {
+                        score += (10/key.distance);
+                    }
+                    if(key.category_name == "서비스,산업 > 전문대행 > 공간대여 > 스터디카페,스터디룸")
+                    {
+                        score += (15/key.distance);
+                    }
+                    if(key.category_group_code == "BK9")
+                    {
+                        score += (10/key.distance);
+                    }
+                    if(key.category_group_code == "HP8")
+                    {
+                        score += (10/key.distance);
+                    }
+                    if(key.category_group_code == "PM9")
+                    {
+                        score += (10/key.distance);
+                    }
                 }
             }
             if(score >=5) score = 5;
@@ -104,7 +105,8 @@ function findPlay(latlng, cb)
             }
             for (const key of result)
             {
-                score += (13/key.distance);
+                if(key.distance <= 50) score +=0.25;
+                else score += (13/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
@@ -137,23 +139,29 @@ function findBar(latlng, cb)
                 pagination.nextPage();
             }
             for (const key of result)
-            {                
-                score += (5/key.distance);
+            {
+                if(key.distance <= 50) score += 0.25;
+                else score += (5/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
             score = Number.parseFloat(score);
             cb(score);
-
         }
     };
     places.keywordSearch('술집', callback, { location : latlng, radius : 50, sort : kakao.maps.services.SortBy.DISTANCE});  
 }
 
-function update(chart, data)
+function updateChart(chart, data, cb)
 {
+    var r = Math.random() * 255;
+    var g = Math.random() * 255;
+    var b = Math.random() * 255;
+    var str = 'rgba(' + r.toFixed(0) + ', ' + g.toFixed(0) + ', ' + b.toFixed(0) + ', 0.3)';
+
     chart.data.datasets.forEach((dataset) =>{
         dataset.data = data;
+        dataset.backgroundColor = str;
     });
-    chart.update();
+    cb(chart);
 }

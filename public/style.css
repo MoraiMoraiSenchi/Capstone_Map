@@ -4,12 +4,60 @@ body {
   width: 100%;
 }
 #map {
-  height: 50%;
+  height: 65%;
   width: 100%;
   display: flex;
 }
+
+.containerBox {
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
 #chartContainer {
-  margin-top: 2%;
-  height: 45%;
-  width: 40%;
+  margin-top: -5%;
+  height: 20vh;
+  width: 30vw;
+  display: inline;
+}
+
+.scoreBox {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  font-family: "Noto Serif KR", serif;
+  font-weight: bolder;
+}
+
+.scoreIndex {
+  flex: auto;
+  margin: 5%;
+  text-align: center;
+  word-break: keep-all;
+}
+
+#scoreContainer {
+  display: flex;
+  margin: 5%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+h2 {
+  flex-wrap: wrap;
+  font-family: "Noto Serif KR", serif;
+}
+
+.logo {
+  height: 10%;
+  opacity: 0.5;
+  float: right;
+  margin: 12% 2% 0% 0%;
+  animation: fadeOut 2.5s ease-in-out;
+}
+@keyframes fadeOut {
+  50% {
+    transform: rotate(360deg);
+  }
 }

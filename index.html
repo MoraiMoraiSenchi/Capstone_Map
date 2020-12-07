@@ -14,12 +14,39 @@
     <script src = "CCTV_INFO.json"></script> <!-- CCTV json 데이터-->
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=368cbd36dadbf4ad8c1a657b33af0907&libraries=services"></script>
     <link href="style.css", rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="map"></div>
     <div id="clickLatlng"></div>
-    <div id="chartContainer">
-        <canvas id="myChart"></canvas>
+    <img src="logo.png" class="logo"/>
+    <div class="containerBox">
+        <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div id="scoreContainer">
+            <div class="scoreIndex">
+                <h2>편의성</h2>
+                <div id="Con" class="scoreBox"></div>
+            </div>
+            <div class="scoreIndex">
+                <h2>안전성</h2>
+                <div id="Safety"" class="scoreBox"></div>
+            </div>
+            <div class="scoreIndex">
+                <h2>먹거리</h2>
+                <div id="Res" class="scoreBox"></div>
+            </div>
+            <div class="scoreIndex">
+                <h2>교통성</h2>
+                <div id="Tra" class="scoreBox"></div>
+            </div>
+            <div class="scoreIndex">
+                <h2>놀거리</h2>
+                <div id="Play" class="scoreBox"></div>
+            </div>
+        </div>
     </div>
     <script>
         BUS_STATION_CCTV_INFO_INIT();
@@ -54,9 +81,10 @@
             {
                 scale: 
                 {
-                    ticks: {max : 5, min : 0, stepSize : 1},
-                    pointLabels : { fontSize : 13, fontStyle : 'bold'}
-                }
+                    ticks: {max : 5, min : 0, stepSize : 1, fontSize : 15, fontFamily : "'Noto Serif KR', serif"},
+                    pointLabels : { fontSize : 12, fontStyle : 'bald', fontFamily : "'Noto Serif KR', serif"}
+                },
+                legend: { display:false }
             }
         });
 
@@ -69,6 +97,7 @@
             var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
             clicked_position = latlng // 클릭한 위치에 위도 경도 대입
 
+
             draw_Circle(latlng); // 100/200/500 반경 원 생성
 
             bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
@@ -76,19 +105,19 @@
             Tra = TRA_score(bus_cctv_Array);
             Safety = SAFETY_score(bus_cctv_Array);
             
-            findRes(latlng,function(x){
-                Res = x;
-                findCon(latlng,function(x){Con = x;});
-                findPlay(latlng,function(x){Play = x;});
-                findBar(latlng,function(x){
-                Safety -= x
+            findRes(latlng, function(x){ Res = x;});
+            findCon(latlng, function(x){ Con = x;});
+            findPlay(latlng, function(x){ Play = x;});
+            findBar(latlng, function(x)
+            {
+                Safety -=x;
                 if(Safety < 0) Safety = 0;
-                update(radarChart, [Con, Safety, Res, Tra, Play]);
-                //console.log(Con, Safety, Res, Tra, Play);
-            });
-            //setTimeout(function(){update(radarChart, [Con, Safety, Res, Tra, Play])}, 1000);
-            //  // 오각형 그래프 표현하는 함수
-        });
+                updateChart(radarChart, [Con,Safety,Res,Tra,Play], function(x)
+                {
+                    x.update();
+                    ShowText(Con, Safety, Res, Tra, Play);
+                });
+            })
     });
     </script>
 </body>

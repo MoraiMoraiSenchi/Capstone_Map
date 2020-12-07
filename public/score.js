@@ -39,3 +39,12 @@ function SAFETY_score(bcArr)
     score = Number.parseFloat(score);
     return score;
 }
+
+function ShowText(C, S, R, T, P)
+{
+    document.getElementById("Con").innerHTML = C.toFixed(1);
+    document.getElementById("Safety").innerHTML = S.toFixed(1);
+    document.getElementById("Res").innerHTML = R.toFixed(1);
+    document.getElementById("Tra").innerHTML = T.toFixed(1);
+    document.getElementById("Play").innerHTML = P.toFixed(1);
+}
