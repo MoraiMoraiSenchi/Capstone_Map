@@ -42,43 +42,35 @@ function findCon(latlng, cb)
                 if(key.category_group_code == 'CS2')
                 {
                     score += (20/key.distance);
-                    array[0] += (20/key.distance);
                     
                 }
                 if(key.category_name == "가정,생활 > 슈퍼마켓")
                 {
                     score += (15/key.distance);
-                    array[1] += (15/key.distance);
                 }
                 if(key.category_name == "가정,생활 > 세탁소")
                 {
                     score += (15/key.distance);
-                    array[2] += (15/key.distance);
                 }
                 if(key.category_name == "가정,생활 > 미용 > 미용실")
                 {
                     score += (10/key.distance);
-                    array[3] += (10/key.distance);
                 }
                 if(key.category_name == "서비스,산업 > 전문대행 > 공간대여 > 스터디카페,스터디룸")
                 {
                     score += (15/key.distance);
-                    array[4] += (15/key.distance);
                 }
                 if(key.category_group_code == "BK9")
                 {
                     score += (10/key.distance);
-                    array[5] += (10/key.distance);
                 }
                 if(key.category_group_code == "HP8")
                 {
                     score += (10/key.distance);
-                    array[6] += (10/key.distance);
                 }
                 if(key.category_group_code == "PM9")
                 {
                     score += (10/key.distance);
-                    array[7] += (10/key.distance);
                 }
             }
             if(score >=5) score = 5;
