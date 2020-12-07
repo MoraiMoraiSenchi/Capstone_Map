@@ -92,7 +92,7 @@ function count_BUSSTOP_CCTV(mouse_lat, mouse_long) // 주변의 버스 정류장
     for (const key of CCTV_JSON)
     {
         distance = getDistanceFromLatLonInKm(key.LATITUDE, key.LONGITUDE, mouse_lat, mouse_long)
-        if(distance <= 500) 
+        if(distance <= 250) 
         {
             count_bus_cctv[i] = distance;
             i++;
