@@ -49,15 +49,9 @@ h2 {
   font-family: "Noto Serif KR", serif;
 }
 
-.logo {
+#logo {
   height: 10%;
-  opacity: 0.5;
+  opacity: 1;
   float: right;
   margin: 12% 2% 0% 0%;
-  animation: fadeOut 2.5s ease-in-out;
-}
-@keyframes fadeOut {
-  50% {
-    transform: rotate(360deg);
-  }
 }

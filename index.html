@@ -20,7 +20,7 @@
 <body>
     <div id="map"></div>
     <div id="clickLatlng"></div>
-    <img src="logo.png" class="logo"/>
+    <img src="logo.png" id="logo"/>
     <div class="containerBox">
         <div id="chartContainer">
             <canvas id="myChart"></canvas>
@@ -93,8 +93,14 @@
         // 지도에 클릭 이벤트를 등록합니다
         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
         
+
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
             var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
+            var im = document.getElementById("logo");
+            im.animate({
+                transform: ['rotate(0deg)', 'rotate(360deg)', 'rotate(0deg)'],
+                easing : [ 'ease-in', 'ease-out']
+            }, 1500);
             clicked_position = latlng // 클릭한 위치에 위도 경도 대입
 
             draw_Circle(latlng); // 100/200/500 반경 원 생성

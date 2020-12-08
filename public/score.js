@@ -51,22 +51,47 @@ function make_range(x)
 
 async function updateChart(latlng, chart, Tra, Safety)
 {
-    Con = await findCon(latlng) 
-    + await findMart(latlng) 
-    + await findLaundry(latlng) 
-    + await findHair(latlng) 
-    + await findStudy(latlng) 
-    + await findHospital(latlng) 
-    + await findBank(latlng) 
-    + await findPhar(latlng);
+    var Con = 0, Play = 0;
+    var ConArray = new Array();
+    var PlayArray = new Array();
+
+    Res = await findPlace(latlng, '음식점', 200, 13, 13);
+
+    ConArray.push(await findPlace(latlng, '편의점', 100, 20, 20));
+    ConArray.push(await findPlace(latlng, '마트', 200, 20, 15));
+    ConArray.push(await findPlace(latlng, '세탁소', 200, 20, 15));
+    ConArray.push(await findPlace(latlng, '미용실', 200, 20, 10));
+    ConArray.push(await findPlace(latlng, '스터디카페', 250, 20, 15));
+    ConArray.push(await findPlace(latlng, '은행', 500, 20, 10));
+    ConArray.push(await findPlace(latlng, '병원', 1000, 20, 10));
+    ConArray.push(await findPlace(latlng, '약국', 500, 20 ,10));
+
+    PlayArray.push(await findPlace(latlng, 'PC방', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '오락실', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '술집', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '만화카페', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '영화관', 1000, 13, 13));
+
+    Pub = await findPlace(latlng, '술집', 100, 50, 13);
+
+
+    for(const key of ConArray)
+    {
+        Con += key[0];
+    }
     
-    Res = await findRes(latlng);
-    Safety -= await findBar(latlng);
-    Play = await findPC(latlng) + await findGameRoom(latlng) + await findComic(latlng) + await findBar_Play(latlng) + await findTheater(latlng);
-
-
+    for(const key of PlayArray)
+    {
+        Play += key[0];
+    }
+    
     Con = make_range(Con);
+
+    Safety -= Pub[0];
     Safety = make_range(Safety);
+
+    Res[0] = make_range(Res[0]);
+
     Play = make_range(Play);
 
     var r = Math.random() * 255;
@@ -75,10 +100,10 @@ async function updateChart(latlng, chart, Tra, Safety)
     var str = 'rgba(' + r.toFixed(0) + ', ' + g.toFixed(0) + ', ' + b.toFixed(0) + ', 0.3)';
 
     chart.data.datasets.forEach((dataset) =>{
-        dataset.data = [Con, Safety, Res, Tra, Play];
+        dataset.data = [Con, Safety, Res[0], Tra, Play];
         dataset.backgroundColor = str;
     });
 
     chart.update();
-    ShowText(Con, Safety, Res, Tra, Play);
+    ShowText(Con, Safety, Res[0], Tra, Play);
 }
