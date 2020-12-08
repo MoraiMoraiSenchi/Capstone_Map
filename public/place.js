@@ -11,8 +11,8 @@ function findRes(latlng, cb)
             }
             for (const key of result)
             {
-                if(key.distance <= 20) score += 0.25;
-                else score += (8/key.distance);
+                if(key.distance <= 13) score += 0.25
+                else score += (13/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
@@ -20,7 +20,8 @@ function findRes(latlng, cb)
             cb(score);
         }
     };
-    places.keywordSearch('음식점', callback, { location : latlng, radius : 150, sort : kakao.maps.services.SortBy.DISTANCE},);
+    places.keywordSearch('음식점', callback, { location : latlng, radius : 200, sort : kakao.maps.services.SortBy.DISTANCE},);
+    delete places
 }
 
 function findCon(latlng, cb)
@@ -42,7 +43,6 @@ function findCon(latlng, cb)
                     if(key.category_group_code == 'CS2')
                     {
                         score += (20/key.distance);
-                        
                     }
                     if(key.category_name == "가정,생활 > 슈퍼마켓")
                     {
@@ -88,6 +88,8 @@ function findCon(latlng, cb)
     places.keywordSearch('은행', callback, { location : latlng, radius : 500, sort : kakao.maps.services.SortBy.DISTANCE}); // category_group_code == "BK9"
     places.keywordSearch('병원', callback, { location : latlng, radius : 1000, sort : kakao.maps.services.SortBy.DISTANCE}); // category_group_Code == "HP8"
     places.keywordSearch('약국', callback, { location : latlng, radius : 500, sort : kakao.maps.services.SortBy.DISTANCE}); // category_group_code == "PM9"
+    
+    delete places;
 }
 
 
@@ -105,14 +107,13 @@ function findPlay(latlng, cb)
             }
             for (const key of result)
             {
-                if(key.distance <= 50) score +=0.25;
+                if(key.distance <= 13) score +=0.25;
                 else score += (13/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
             score = Number.parseFloat(score);
             cb(score);
-
         }
     };
     places.keywordSearch('PC방', callback, { location : latlng, radius : 250, sort : kakao.maps.services.SortBy.DISTANCE});
@@ -120,6 +121,8 @@ function findPlay(latlng, cb)
     places.keywordSearch('술집', callback, { location : latlng, radius : 250, sort : kakao.maps.services.SortBy.DISTANCE});
     places.keywordSearch('만화카페', callback, { location : latlng, radius : 250, sort : kakao.maps.services.SortBy.DISTANCE});
     places.keywordSearch('영화관', callback, { location : latlng, radius : 1000, sort : kakao.maps.services.SortBy.DISTANCE});     
+    
+    delete places;
 }
 
 function findBar(latlng, cb)
@@ -141,7 +144,7 @@ function findBar(latlng, cb)
             for (const key of result)
             {
                 if(key.distance <= 50) score += 0.25;
-                else score += (5/key.distance);
+                else score += (13/key.distance);
             }
             if(score >=5) score = 5;
             score = score.toFixed(1);
@@ -149,7 +152,9 @@ function findBar(latlng, cb)
             cb(score);
         }
     };
-    places.keywordSearch('술집', callback, { location : latlng, radius : 50, sort : kakao.maps.services.SortBy.DISTANCE});  
+    places.keywordSearch('술집', callback, { location : latlng, radius : 100, sort : kakao.maps.services.SortBy.DISTANCE});  
+
+    delete places;
 }
 
 function updateChart(chart, data, cb)

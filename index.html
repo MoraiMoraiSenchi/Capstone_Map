@@ -6,7 +6,7 @@
     <title>Capstone</title>
     <meta charset="utf-8">
     <script src="chart.js\dist\Chart.js"></script> <!-- 오각형 그래프에 사용할 js파일-->
-    <script src = "place.js"></script> <!-- 키워드 검색하는 js파일-->
+    <script src = "place_copy.js"></script> <!-- 키워드 검색하는 js파일-->
     <script src = "circle.js"></script> <!-- 원 나타내는 js파일-->
     <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
     <script src = "score.js"></script> <!-- 점수 내는 js 파일-->
@@ -31,7 +31,7 @@
                 <div id="Con" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <h2>안전성</h2>
+                <h2>안전</h2>
                 <div id="Safety"" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
@@ -97,27 +97,29 @@
             var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
             clicked_position = latlng // 클릭한 위치에 위도 경도 대입
 
-
             draw_Circle(latlng); // 100/200/500 반경 원 생성
 
             bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
 
             Tra = TRA_score(bus_cctv_Array);
-            Safety = SAFETY_score(bus_cctv_Array);
-            
-            findRes(latlng, function(x){ Res = x;});
-            findCon(latlng, function(x){ Con = x;});
-            findPlay(latlng, function(x){ Play = x;});
-            findBar(latlng, function(x)
-            {
-                Safety -=x;
-                if(Safety < 0) Safety = 0;
-                updateChart(radarChart, [Con,Safety,Res,Tra,Play], function(x)
-                {
-                    x.update();
-                    ShowText(Con, Safety, Res, Tra, Play);
-                });
-            })
+            Safety = SAFETY_score(bus_cctv_Array);            
+
+
+            // findRes(latlng, function(x){ Res = x;});
+            // findCon(latlng, function(x){ Con = x;});
+            // findPlay(latlng, function(x){ Play = x;});
+            // findBar(latlng, function(x)
+            // {
+            //     Safety -=x;
+            //     if(Safety < 0) Safety = 0;
+            //     updateChart(radarChart, [Con,Safety,Res,Tra,Play], function(x)
+            //     {
+            //         x.update();
+            //         ShowText(Con, Safety, Res, Tra, Play);
+            //     });
+            // })
+
+            updateChart(latlng, radarChart, Tra, Safety);
     });
     </script>
 </body>
