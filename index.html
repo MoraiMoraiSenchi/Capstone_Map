@@ -10,6 +10,7 @@
     <script src = "circle.js"></script> <!-- 원 나타내는 js파일-->
     <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
     <script src = "score.js"></script> <!-- 점수 내는 js 파일-->
+    <script src = "buttonclick.js"></script> <!-- 버튼 클릭 함수-->
     <script src = "BUSSTOP_INFO.json"></script> <!-- 버스 정류장 json 데이터-->
     <script src = "CCTV_INFO.json"></script> <!-- CCTV json 데이터-->
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=368cbd36dadbf4ad8c1a657b33af0907&libraries=services"></script>
@@ -27,43 +28,48 @@
         </div>
         <div id="scoreContainer">
             <div class="scoreIndex">
-                <h2>편의성</h2>
+                <button onclick = "Con_Click(BtnCon)">편의성</button>
                 <div id="Con" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <h2>안전</h2>
-                <div id="Safety"" class="scoreBox"></div>
+                <button onclick = "Safety_Click(bus_cctv_Array, BtnSafety)">안전</button>
+                <div id="Safety" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <h2>먹거리</h2>
+                <button onclick = "Res_Click(BtnRes)">먹거리</button>
                 <div id="Res" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <h2>교통성</h2>
+                <button onclick = "Tra_Click(bus_cctv_Array)">교통성</button>
                 <div id="Tra" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <h2>놀거리</h2>
+                <button onclick = "Play_Click(BtnPlay)">놀거리</button>
                 <div id="Play" class="scoreBox"></div>
             </div>
+        </div>
+        <div id="infobox">
+            <p id = "info_p"></p>
+            <p id = "count_p"></p>
         </div>
     </div>
     <script>
         BUS_STATION_CCTV_INFO_INIT();
+
+        var im = document.getElementById("logo");
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(35.17690999613079, 126.90610797027583), // 지도의 중심좌표
                 level: 5 // 지도의 확대 레벨
             };
+        var BtnCon, BtnSafety, BtnRes, BtnPlay;
         
-        var Con = 0, Safety = 0, Res = 0, Tra = 0, Play = 0; // 그래프에 사용할 변수
-        var clicked_position = new kakao.maps.LatLng(0,0); // 클릭한 위치
-        var i = 0;
-        var bus_cctv_Array = new Array(); // 각 함수들의 리턴값 저장할 배열
-
+        //var Con = 0, Safety = 0, Res = 0, Tra = 0, Play = 0; // 그래프에 사용할 변수 - indexl.html에서 안 쓰므로 삭제 예정
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-        let myChart = document.getElementById('myChart').getContext('2d');
+        var bus_cctv_Array = new Array(); // 버스와 cctv 정보 저장할 배열
+
+        let myChart = document.getElementById('myChart').getContext('2d'); // 오각형 그래프 생성
 
         let radarChart = new Chart(myChart, {
             type: 'radar',
@@ -72,13 +78,16 @@
                 datasets: 
                 [{
                     label: '점수',
-                    data: [Con, Safety, Res, Tra, Play],
+                    data: [0, 0, 0, 0, 0],
                     pointStyle: 'star',
                     backgroundColor : 'rgba(168, 100, 255, 0.3)'
                 }]
             },
             options: 
             {
+                layout:{
+                    padding : {left : 0, right :-200, top : 0, bottom: 0},
+                },
                 scale: 
                 {
                     ticks: {max : 5, min : 0, stepSize : 1, fontSize : 15, fontFamily : "'Noto Serif KR', serif"},
@@ -90,42 +99,26 @@
 
         make_Circle(map); // 지도에 원을 표시합니다
 
-        // 지도에 클릭 이벤트를 등록합니다
-        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-        
-
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
             var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
-            var im = document.getElementById("logo");
             im.animate({
                 transform: ['rotate(0deg)', 'rotate(360deg)', 'rotate(0deg)'],
                 easing : [ 'ease-in', 'ease-out']
             }, 1500);
-            clicked_position = latlng // 클릭한 위치에 위도 경도 대입
 
             draw_Circle(latlng); // 100/200/500 반경 원 생성
 
             bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
-
             Tra = TRA_score(bus_cctv_Array);
-            Safety = SAFETY_score(bus_cctv_Array);            
-
-
-            // findRes(latlng, function(x){ Res = x;});
-            // findCon(latlng, function(x){ Con = x;});
-            // findPlay(latlng, function(x){ Play = x;});
-            // findBar(latlng, function(x)
-            // {
-            //     Safety -=x;
-            //     if(Safety < 0) Safety = 0;
-            //     updateChart(radarChart, [Con,Safety,Res,Tra,Play], function(x)
-            //     {
-            //         x.update();
-            //         ShowText(Con, Safety, Res, Tra, Play);
-            //     });
-            // })
-
-            updateChart(latlng, radarChart, Tra, Safety);
+            Safety = SAFETY_score(bus_cctv_Array);     
+            
+            updateChart(latlng, radarChart, Tra, Safety, function(C, S, R, P)
+            {
+                BtnCon = C;
+                BtnSafety = S;
+                BtnRes = R;
+                BtnPlay = P;
+            });
     });
     </script>
 </body>

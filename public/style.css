@@ -4,13 +4,14 @@ body {
   width: 100%;
 }
 #map {
-  height: 65%;
+  height: 60%;
   width: 100%;
   display: flex;
 }
 
 .containerBox {
-  height: 35%;
+  padding: 1%;
+  height: 33%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -21,6 +22,8 @@ body {
   height: 20vh;
   width: 30vw;
   display: inline;
+  margin-right: 3%;
+  margin-left: -10%;
 }
 
 .scoreBox {
@@ -32,26 +35,54 @@ body {
 }
 
 .scoreIndex {
-  flex: auto;
-  margin: 5%;
-  text-align: center;
   word-break: keep-all;
+  margin: 0% 2% 0% 2%;
 }
 
 #scoreContainer {
   display: flex;
-  margin: 5%;
+  flex: auto;
+  justify-content: center;
   flex-direction: row;
-  flex-wrap: nowrap;
+  border: 2px gold dashed;
+  padding: 0%;
 }
-h2 {
-  flex-wrap: wrap;
+
+button {
   font-family: "Noto Serif KR", serif;
+  font-size: 1.3em;
+  font-weight: bolder;
+  background-color: rgba(250, 227, 153, 0.3);
+  border-radius: 10%;
+  margin-bottom: 5%;
+  border: 0px;
 }
 
 #logo {
   height: 10%;
-  opacity: 1;
   float: right;
   margin: 12% 2% 0% 0%;
+}
+
+#infobox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  text-align: center;
+  border: 2px red dashed;
+  height: 70%;
+  width: 40%;
+  position: relative;
+  padding: 1% 0% 1% 0%;
+  font-family: "Noto Serif KR", serif;
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+#info_p {
+  border: 2px green dashed;
+}
+#count_p {
+  border: 2px purple dashed;
 }

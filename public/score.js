@@ -41,7 +41,6 @@ function ShowText(C, S, R, T, P)
     document.getElementById("Play").innerHTML = P.toFixed(1);
 }
 
-
 function make_range(x)
 {
     if(x > 5) x = 5;
@@ -49,13 +48,14 @@ function make_range(x)
     return x = Number.parseFloat(x.toFixed(1));
 }
 
-async function updateChart(latlng, chart, Tra, Safety)
+async function updateChart(latlng, chart, Tra, Safety, cb)
 {
     var Con = 0, Play = 0;
-    var ConArray = new Array();
-    var PlayArray = new Array();
+    ConArray = new Array();
+    PlayArray = new Array();
 
-    Res = await findPlace(latlng, '음식점', 200, 13, 13);
+    var Res = await findPlace(latlng, '음식점', 200, 13, 13);
+    var Pub = await findPlace(latlng, '술집', 100, 50, 13);
 
     ConArray.push(await findPlace(latlng, '편의점', 100, 20, 20));
     ConArray.push(await findPlace(latlng, '마트', 200, 20, 15));
@@ -63,28 +63,22 @@ async function updateChart(latlng, chart, Tra, Safety)
     ConArray.push(await findPlace(latlng, '미용실', 200, 20, 10));
     ConArray.push(await findPlace(latlng, '스터디카페', 250, 20, 15));
     ConArray.push(await findPlace(latlng, '은행', 500, 20, 10));
-    ConArray.push(await findPlace(latlng, '병원', 1000, 20, 10));
+    ConArray.push(await findPlace(latlng, '병원', 500, 20, 10));
     ConArray.push(await findPlace(latlng, '약국', 500, 20 ,10));
+
+    //console.log(ConArray);
 
     PlayArray.push(await findPlace(latlng, 'PC방', 250, 13, 13));
     PlayArray.push(await findPlace(latlng, '오락실', 250, 13, 13));
-    PlayArray.push(await findPlace(latlng, '술집', 250, 13, 13));
     PlayArray.push(await findPlace(latlng, '만화카페', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '술집', 250, 13, 13));
+    PlayArray.push(await findPlace(latlng, '노래방', 250, 13, 13));
     PlayArray.push(await findPlace(latlng, '영화관', 1000, 13, 13));
 
-    Pub = await findPlace(latlng, '술집', 100, 50, 13);
-
-
-    for(const key of ConArray)
-    {
-        Con += key[0];
-    }
+    for(const key of ConArray) Con += key[0];
+    for(const key of PlayArray) Play += key[0];
     
-    for(const key of PlayArray)
-    {
-        Play += key[0];
-    }
-    
+   
     Con = make_range(Con);
 
     Safety -= Pub[0];
@@ -106,4 +100,6 @@ async function updateChart(latlng, chart, Tra, Safety)
 
     chart.update();
     ShowText(Con, Safety, Res[0], Tra, Play);
+
+    cb(ConArray, Pub, Res, PlayArray);
 }

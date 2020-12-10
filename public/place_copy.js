@@ -10,16 +10,15 @@ function findPlace(latlng, keyword, r, threshold, coef)
             if(status =='ZERO_RESULT') resolve(score);
             if(status === kakao.maps.services.Status.OK)
             {
-                if(pagination.hasNextpage)
-                {
-                    pagination.nextPage();
-                }
+                //console.log(keyword, pagination.totalCount);
+                console.log(keyword, pagination.current);
                 for(const key of result)
                 {
                     if(key.distance <= threshold) score[0] += 0.25;
                     else score[0] += (coef/key.distance);
                     score[1]++;
-                }
+                } 
+                if(pagination.hasNextPage) pagination.nextPage();     
                 resolve(score);
             }
         };
