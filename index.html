@@ -21,8 +21,7 @@
 <body>
     <div id="map"></div>
     <div id="clickLatlng"></div>
-    <img src="logo.png" id="logo"/>
-    <div class="containerBox">
+    <div id="containerBox">
         <div id="chartContainer">
             <canvas id="myChart"></canvas>
         </div>
@@ -52,11 +51,14 @@
             <p id = "info_p"></p>
             <p id = "count_p"></p>
         </div>
+        <img src="logo.png" id="logo"/>
     </div>
     <script>
         BUS_STATION_CCTV_INFO_INIT();
 
         var im = document.getElementById("logo");
+        var bg = document.getElementById("containerBox")
+
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(35.17690999613079, 126.90610797027583), // 지도의 중심좌표
@@ -100,11 +102,18 @@
         make_Circle(map); // 지도에 원을 표시합니다
 
         kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+            var r = Math.random()*255, g = Math.random()*255, b = Math.random()*10;
+
             var latlng = mouseEvent.latLng;   // 클릭한 위도, 경도 정보를 가져옵니다
+
             im.animate({
                 transform: ['rotate(0deg)', 'rotate(360deg)', 'rotate(0deg)'],
-                easing : [ 'ease-in', 'ease-out']
+                easing : [ 'ease-in', 'ease-out', 'ease-in']
             }, 1500);
+            bg.animate([
+                    { backgroundColor: "rgba(" + r.toFixed(0) + "," + g.toFixed(0) + ",0 "   + "," + "0.08)"}],
+                    { duration : 500, fill : "forwards"}
+                ); // 전남대 로고, 배경 애니메이션
 
             draw_Circle(latlng); // 100/200/500 반경 원 생성
 
