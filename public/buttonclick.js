@@ -11,8 +11,10 @@ function Con_Click(Con){
         "스터디카페가 " + Con[4][1] + "개 있습니다\n" +
         "은행/ATM이 " + Con[5][1] + "개 있습니다\n" +
         "병원이 " + Con[6][1] + "개, " +
-        "약국이 " + Con[7][1] + "개\n";
+        "약국이 " + Con[7][1] + "개\n" +
         "헬스장이 " + Con[8][1] + "개 있습니다";
+
+    return 1;
 }
 
 function Safety_Click(bcArr, Pub){
@@ -22,9 +24,9 @@ function Safety_Click(bcArr, Pub){
     if(bcArr[0] == undefined) 
         document.getElementById("count_p").innerText= "지도 클릭 후 버튼을 다시 눌러주세요\n";
     else 
-    {
         document.getElementById("count_p").innerText= "주변에 CCTV가 " + (bcArr.length-bcArr[0]-1) + "개 있습니다\n" + "너무 가까운 술집이 " + Pub[1] + "개 있습니다";
-    }
+
+    return 2;
 }
 
 function Res_Click(Res){
@@ -39,6 +41,8 @@ function Res_Click(Res){
         "일식점은 " + Res[3][1] + "개\n" +
         "분식점은 " + Res[4][1] + "개, " +
         "패스트푸드점은 " + Res[5][1] + "개 있습니다";
+
+    return 3;
 }
 
 function Tra_Click(bcArr){
@@ -48,6 +52,8 @@ function Tra_Click(bcArr){
         document.getElementById("count_p").innerText= "지도 클릭 후 버튼을 다시 눌러주세요\n";
     else 
         document.getElementById("count_p").innerText="주변에 버스 정류장이 " + bcArr[0] + "개 있습니다"
+    
+    return 4;
 }
 
 function Play_Click(Play){
@@ -62,5 +68,16 @@ function Play_Click(Play){
         "노래방은 " + Play[3][1] + "개 있습니다\n" +
         "영화관은 " + Play[4][1] + "개 있습니다\n" +
         "술집은 " + (Play[5][1] + + Play[6][1] + Play[7][1]) + "개 있습니다\n";
+    
+    return 5;
+}
 
+function updateText(status, bcArr, Con, Res, Pub, Play)
+{
+    if(status === 0) return;
+    if(status === 1) Con_Click(Con);
+    if(status === 2) Safety_Click(bcArr, Pub);
+    if(status === 3) Res_Click(Res);
+    if(status === 4) Tra_Click(bcArr);
+    if(status === 5) Play_Click(Play);
 }

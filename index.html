@@ -6,7 +6,7 @@
     <title>Capstone</title>
     <meta charset="utf-8">
     <script src="chart.js\dist\Chart.js"></script> <!-- 오각형 그래프에 사용할 js파일-->
-    <script src = "place_copy.js"></script> <!-- 키워드 검색하는 js파일-->
+    <script src = "place.js"></script> <!-- 키워드 검색하는 js파일-->
     <script src = "circle.js"></script> <!-- 원 나타내는 js파일-->
     <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
     <script src = "score.js"></script> <!-- 점수 내는 js 파일-->
@@ -27,23 +27,23 @@
         </div>
         <div id="scoreContainer">
             <div class="scoreIndex">
-                <button onclick = "Con_Click(BtnCon)">편의성</button>
+                <button onclick = "click_status = Con_Click(BtnCon)">편의성</button>
                 <div id="Con" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <button onclick = "Safety_Click(bus_cctv_Array, BtnSafety)">안전</button>
+                <button onclick = "click_status = Safety_Click(bus_cctv_Array, BtnSafety)">안전</button>
                 <div id="Safety" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <button onclick = "Res_Click(BtnRes)">먹거리</button>
+                <button onclick = "click_status = Res_Click(BtnRes)">먹거리</button>
                 <div id="Res" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <button onclick = "Tra_Click(bus_cctv_Array)">교통성</button>
+                <button onclick = "click_status = Tra_Click(bus_cctv_Array)">교통성</button>
                 <div id="Tra" class="scoreBox"></div>
             </div>
             <div class="scoreIndex">
-                <button onclick = "Play_Click(BtnPlay)">놀거리</button>
+                <button onclick = "click_status = Play_Click(BtnPlay)">놀거리</button>
                 <div id="Play" class="scoreBox"></div>
             </div>
         </div>
@@ -55,6 +55,8 @@
     </div>
     <script>
         BUS_STATION_CCTV_INFO_INIT();
+
+        var click_status = 0;
 
         var im = document.getElementById("logo");
         var bg = document.getElementById("containerBox")
@@ -111,8 +113,8 @@
                 easing : [ 'ease-in', 'ease-out', 'ease-in']
             }, 1500);
             bg.animate([
-                    { backgroundColor: "rgba(" + r.toFixed(0) + "," + g.toFixed(0) + ",0 "   + "," + "0.08)"}],
-                    { duration : 500, fill : "forwards"}
+                    { backgroundColor: "rgba(" + r.toFixed(0) + "," + g.toFixed(0) + ",0 "   + "," + "0.05)"}],
+                    { duration : 750, fill : "forwards"}
                 ); // 전남대 로고, 배경 애니메이션
 
             draw_Circle(latlng); // 100/200/500 반경 원 생성
@@ -127,6 +129,7 @@
                 BtnSafety = S;
                 BtnRes = R;
                 BtnPlay = P;
+                updateText(click_status, bus_cctv_Array, BtnCon, BtnRes, BtnSafety, BtnPlay )
             });
     });
     </script>

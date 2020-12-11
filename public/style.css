@@ -41,7 +41,7 @@ body {
 
 #scoreContainer {
   display: flex;
-  flex: auto;
+  width: 25%;
   justify-content: center;
   flex-direction: row;
   padding: 0%;
@@ -60,7 +60,7 @@ button {
 #logo {
   height: 30%;
   float: right;
-  margin: 12% 2% 0% 0%;
+  margin: 12% 2% 0% 10%;
 }
 
 #infobox {
@@ -69,14 +69,9 @@ button {
   justify-content: center;
   flex-wrap: nowrap;
   text-align: center;
-  width: 40%;
+  width: 35%;
   position: relative;
   font-family: "Noto Serif KR", serif;
   font-size: 1.3em;
   font-weight: bolder;
-}
-
-#info_p {
-}
-#count_p {
 }
