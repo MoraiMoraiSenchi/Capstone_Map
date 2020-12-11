@@ -1,7 +1,7 @@
 function Con_Click(Con){
     document.getElementById("info_p").innerText="편의는 주변의 생활 서비스 관련 가게들을 고려한 점수입니다";
     if(Con == undefined)
-        document.getElementById("count_p").innerText= "지도 클릭 후 버튼을 다시 눌러주세요\n";
+        document.getElementById("count_p").innerText= "지도를 클릭해주세요\n";
     else
          document.getElementById("count_p").innerText= 
         "주변에 편의점이 " + Con[0][1] + "개, " +
@@ -22,7 +22,7 @@ function Safety_Click(bcArr, Pub){
     document.getElementById("info_p").innerText="안전은 주변의 CCTV와 술집을 고려한 점수입니다\n 가까운 곳에 술집이 있으면 점수가 내려갑니다";
 
     if(bcArr[0] == undefined) 
-        document.getElementById("count_p").innerText= "지도 클릭 후 버튼을 다시 눌러주세요\n";
+        document.getElementById("count_p").innerText= "지도를 클릭해주세요\n";
     else 
         document.getElementById("count_p").innerText= "주변에 CCTV가 " + (bcArr.length-bcArr[0]-1) + "개 있습니다\n" + "너무 가까운 술집이 " + Pub[1] + "개 있습니다";
 
@@ -32,7 +32,7 @@ function Safety_Click(bcArr, Pub){
 function Res_Click(Res){
     document.getElementById("info_p").innerText="먹거리는 주변의 음식점들을 고려한 점수입니다";
     if(Res == undefined)
-        document.getElementById("count_p").innerText = "지도 클릭 후 버튼을 다시 눌러주세요\n";
+        document.getElementById("count_p").innerText = "지도를 클릭해주세요\n";
     else
         document.getElementById("count_p").innerText = 
         "주변에 한식점이 " + Res[0][1] + "개, " +
@@ -49,7 +49,7 @@ function Tra_Click(bcArr){
     document.getElementById("info_p").innerText="교통성은 주변의 버스 정류장을 고려한 점수입니다"
 
     if(bcArr[0] == undefined) 
-        document.getElementById("count_p").innerText= "지도 클릭 후 버튼을 다시 눌러주세요\n";
+        document.getElementById("count_p").innerText= "지도를 클릭해주세요\n";
     else 
         document.getElementById("count_p").innerText="주변에 버스 정류장이 " + bcArr[0] + "개 있습니다"
     
@@ -59,7 +59,7 @@ function Tra_Click(bcArr){
 function Play_Click(Play){
     document.getElementById("info_p").innerText = "놀거리는 주변의 PC방, 영화관, 노래방 등의\n 여가시설을 고려한 점수입니다";
     if(Play == undefined)
-        document.getElementById("count_p").innerText = "지도 클릭 후 버튼을 다시 눌러주세요";
+        document.getElementById("count_p").innerText = "지도를 클릭해주세요";
     else
         document.getElementById("count_p").innerText =
         "주변에 PC방이 " + Play[0][1] + "개, " +

@@ -50,6 +50,8 @@ function make_range(x)
 
 async function updateChart(latlng, chart, Tra, Safety, cb)
 {
+    var totalScore = document.getElementById("Total");
+
     var Con = 0, Play = 0, Pub = 0, Res = 0;
     ResArray = new Array();
     ConArray = new Array();
@@ -62,7 +64,7 @@ async function updateChart(latlng, chart, Tra, Safety, cb)
     ResArray.push(await findPlace(latlng, '분식', 200, 13, 13));
     ResArray.push(await findPlace(latlng, '패스트푸드', 200, 13, 13));
 
-    Pub= await findPlace(latlng, '술집', 100, 50, 13);
+    Pub= await findPlace(latlng, '술집', 100, 50, 8);
 
     ConArray.push(await findPlace(latlng, '편의점', 100, 20, 20));
     ConArray.push(await findPlace(latlng, '마트', 200, 20, 15));
@@ -106,6 +108,7 @@ async function updateChart(latlng, chart, Tra, Safety, cb)
 
     chart.update();
     ShowText(Con, Safety, Res, Tra, Play);
+    totalScore.innerText = (Con+Safety+Res+Tra+Play).toFixed(1);
 
     cb(ConArray, Pub, ResArray, PlayArray);
 }
