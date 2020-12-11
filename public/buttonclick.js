@@ -81,3 +81,23 @@ function updateText(status, bcArr, Con, Res, Pub, Play)
     if(status === 4) Tra_Click(bcArr);
     if(status === 5) Play_Click(Play);
 }
+
+function info_quit()
+{
+    document.getElementById("info_p").innerText = "";
+    document.getElementById("count_p").innerText = "";
+}
+
+function chxboxArray() // coefArray : index 0 -> 편의 항목의 개수, index 1 -> 먹거리 항목의 개수, index 2 -> 놀거리 항목의 개수 / 4번부터 체크 여부 저장하는 배열 
+{
+    var Chxbox = document.getElementsByName("Chxbox");
+    var i = 0;
+
+    var coefArray = new Array();
+
+    for(i=0; i<Chxbox.length; i++)
+    {
+        coefArray.push(Chxbox[i].checked);
+    }
+    return coefArray;
+}

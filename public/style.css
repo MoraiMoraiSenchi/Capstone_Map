@@ -26,35 +26,46 @@ body {
   margin-left: -10%;
 }
 
-.scoreBox {
+#centerContainer {
   display: flex;
-  justify-content: center;
-  font-size: 1.5em;
-  font-family: "Noto Serif KR", serif;
-  font-weight: bolder;
-}
-
-.scoreIndex {
-  word-break: keep-all;
-  margin: 0% 2% 0% 2%;
+  width: 35%;
+  justify-content: space-evenly;
 }
 
 #scoreContainer {
   display: flex;
-  width: 25%;
-  justify-content: center;
-  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  flex-direction: column;
   padding: 0%;
 }
 
-button {
+.scoreBox {
+  display: flex;
+  text-align: right;
+  font-size: 1.2em;
   font-family: "Noto Serif KR", serif;
-  font-size: 1.3em;
+  font-weight: bolder;
+  margin-left: 5%;
+}
+
+.scoreIndex {
+  display: flex;
+  word-break: keep-all;
+  justify-content: space-around;
+}
+
+.scoreIndex button {
+  font-family: "Noto Serif KR", serif;
+  font-size: 1.2em;
   font-weight: bolder;
   background-color: rgba(250, 227, 153, 0.3);
-  border-radius: 10%;
-  margin-bottom: 5%;
+  border-radius: 10px;
   border: 0px;
+}
+
+button:hover {
+  background-color: rgba(250, 144, 144, 0.733);
 }
 
 #logo {
@@ -74,4 +85,34 @@ button {
   font-family: "Noto Serif KR", serif;
   font-size: 130%;
   font-weight: bolder;
+}
+
+span {
+  display: inline;
+  font-size: 1.2em;
+  font-weight: bolder;
+  text-align: center;
+}
+
+#checkboxContainer {
+  font-family: "Noto Serif KR", serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.checkBoxInside {
+  display: flex;
+  justify-content: center;
+  margin: 1%;
+  border: 0.3em rgba(243, 153, 69, 0.151) dashed;
+  border-radius: 10px;
+}
+.checkBoxInside div {
+  margin: 0.1%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
