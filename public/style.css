@@ -3,6 +3,7 @@ body {
   height: 100%;
   width: 100%;
 }
+
 #map {
   height: 60%;
   width: 100%;
@@ -14,7 +15,6 @@ body {
   height: 33%;
   display: flex;
   align-items: center;
-  justify-content: start;
 }
 
 #chartContainer {
@@ -28,13 +28,13 @@ body {
 
 #centerContainer {
   display: flex;
-  width: 35%;
+  width: 45%;
   justify-content: space-evenly;
 }
 
 #scoreContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-end;
   flex-direction: column;
   padding: 0%;
@@ -68,23 +68,21 @@ button:hover {
   background-color: rgba(250, 144, 144, 0.733);
 }
 
-#logo {
-  height: 30%;
-  float: right;
-  margin: 12% 2% 0% 10%;
-}
-
 #infobox {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-wrap: nowrap;
   text-align: center;
   width: 35%;
-  position: relative;
+  height: auto;
   font-family: "Noto Serif KR", serif;
-  font-size: 130%;
+  font-size: 1.3em;
   font-weight: bolder;
+  margin-left: 2%;
+}
+#logo {
+  display: flex;
+  align-self: flex-end;
+  max-width: 3.5%;
 }
 
 span {
@@ -112,7 +110,14 @@ span {
 }
 .checkBoxInside div {
   margin: 0.1%;
+  font-size: 0.95em;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: center;
+}
+
+input[type="range"] {
+  width: 70%;
 }

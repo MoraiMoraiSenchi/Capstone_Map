@@ -88,16 +88,25 @@ function info_quit()
     document.getElementById("count_p").innerText = "";
 }
 
-function chxboxArray() // coefArray : index 0 -> 편의 항목의 개수, index 1 -> 먹거리 항목의 개수, index 2 -> 놀거리 항목의 개수 / 4번부터 체크 여부 저장하는 배열 
+function RangeboxArray()
 {
-    var Chxbox = document.getElementsByName("Chxbox");
+    var Rangebox = document.getElementsByName("RangeBox");
     var i = 0;
 
     var coefArray = new Array();
 
-    for(i=0; i<Chxbox.length; i++)
+    for(i=0; i<Rangebox.length; i++)
     {
-        coefArray.push(Chxbox[i].checked);
+        coefArray.push(Rangebox[i].value);
     }
     return coefArray;
+}
+
+function reset_range()
+{
+    var Rangebox = document.getElementsByName("RangeBox");
+    var i = 0;
+
+    for(i=0; i<Rangebox.length; i++)
+        Rangebox[i].value = 100;   
 }

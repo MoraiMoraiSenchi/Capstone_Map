@@ -62,33 +62,33 @@ async function updateChart(latlng, cA, chart, Tra, Safety, cb)
         latlng : 경위도 (만질필요 없음), keyword(string), 반경(m), 경계값(m), 계수 */
     // findPlace 호출 순서 바꾸면 안 됨
 
-    ConArray.push(await findPlace(latlng, '편의점', 100, 20, 20, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '마트', 200, 20, 15, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '세탁소', 200, 20, 7, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '미용실', 200, 20, 7, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '스터디카페', 250, 20, 15, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '은행', 500, 20, 10, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '병원', 500, 20, 7, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '약국', 500, 20 ,7, coefArray[coef_count]));
-    ConArray.push(await findPlace(latlng, '헬스장', 250, 20 ,10, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '편의점', 100, 100, 25, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '마트', 200, 80, 20, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '세탁소', 200, 20, 5, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '미용실', 200, 20, 5, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '스터디카페', 250, 60, 15, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '은행', 500, 28, 7, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '병원', 500, 28, 7, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '약국', 500, 28 ,7, coefArray[coef_count]));
+    ConArray.push(await findPlace(latlng, '헬스장', 250, 40 ,10, coefArray[coef_count]));
 
-    ResArray.push(await findPlace(latlng, '한식', 200, 13, 13, coefArray[coef_count]));
-    ResArray.push(await findPlace(latlng, '양식', 200, 13, 13, coefArray[coef_count]));
-    ResArray.push(await findPlace(latlng, '중식', 200, 13, 13, coefArray[coef_count]));
-    ResArray.push(await findPlace(latlng, '일식', 200, 13, 13, coefArray[coef_count]));
-    ResArray.push(await findPlace(latlng, '분식', 200, 13, 13, coefArray[coef_count]));
-    ResArray.push(await findPlace(latlng, '패스트푸드', 200, 13, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '한식', 200, 52, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '양식', 200, 52, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '중식', 200, 52, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '일식', 200, 52, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '분식', 200, 52, 13, coefArray[coef_count]));
+    ResArray.push(await findPlace(latlng, '패스트푸드', 200, 52, 13, coefArray[coef_count]));
 
-    PlayArray.push(await findPlace(latlng, 'PC방', 250, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '오락실', 250, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '만화카페', 250, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '노래방', 250, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '영화관', 1000, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '호프', 250, 13, 13, coefArray[coef_count]));
-    PlayArray.push(await findPlace(latlng, '이자카야', 250, 13, 13, coefArray[--coef_count]));
-    PlayArray.push(await findPlace(latlng, '칵테일바', 250, 13, 13, coefArray[--coef_count]));
+    PlayArray.push(await findPlace(latlng, 'PC방', 250, 52, 13, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '오락실', 250, 52, 13, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '만화카페', 250, 52, 13, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '노래방', 250, 52, 13, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '영화관', 1000, 52, 13, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '호프', 250, 40, 10, coefArray[coef_count]));
+    PlayArray.push(await findPlace(latlng, '이자카야', 250, 40, 10, coefArray[--coef_count]));
+    PlayArray.push(await findPlace(latlng, '칵테일바', 250, 40, 10, coefArray[--coef_count]));
 
-    Pub= await findPlace(latlng, '술집', 100, 50, 8, true); // Pub은 가장 나중에 호출할 것
+    Pub= await findPlace(latlng, '술집', 100, 32, 8, 1); // Pub은 가장 나중에 호출할 것
 
     for(const key of ResArray) Res += key[0];
     for(const key of ConArray) Con += key[0];

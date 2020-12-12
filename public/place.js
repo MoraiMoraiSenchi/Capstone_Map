@@ -1,4 +1,4 @@
-function findPlace(latlng, keyword, r, threshold, coef, coef_tf)
+function findPlace(latlng, keyword, r, threshold, coef, coef_a)
 {
     return new Promise(function(resolve)
     {
@@ -7,17 +7,16 @@ function findPlace(latlng, keyword, r, threshold, coef, coef_tf)
         var near_point = 0.25;
         score[0] = 0, score[1] = 0;
 
-        if(coef_tf === false)
-        {
-            near_point = 0;
-            coef = 0;
-        }
+        coef_a /= 100;
+        near_point *= coef_a;
+        coef *= coef_a;
+        threshold = coef/near_point;
 
         var callback = function(result, status, pagination){
             if(status =='ZERO_RESULT') resolve(score);
             if(status === kakao.maps.services.Status.OK)
             {
-                console.log(keyword, "계수 활성화 : ", coef_tf, "near_point : ", near_point, "coef : ", coef)
+                console.log(keyword, "계수 배수 : ", coef_a, "near_point : ", near_point, "coef : ", coef)
                 for(const key of result)
                 {
                     // var marker = new kakao.maps.Marker({
