@@ -8,7 +8,7 @@
     <script src="chart.js\dist\Chart.js"></script> <!-- 오각형 그래프에 사용할 js파일-->
     <script src = "place.js"></script> <!-- 키워드 검색하는 js파일-->
     <script src = "circle.js"></script> <!-- 원 나타내는 js파일-->
-    <script src = "bus_cctv.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
+    <script src = "bus_cctv_light.js"></script> <!-- 버스 정류장/CCTV 개수 세는 js파일-->
     <script src = "score.js"></script> <!-- 점수 내는 js 파일-->
     <script src = "buttonclick.js"></script> <!-- 버튼 클릭 함수-->
     <script src = "BUSSTOP_INFO.json"></script> <!-- 버스 정류장 json 데이터-->
@@ -226,7 +226,7 @@
 
             draw_Circle(latlng); // 100/200/500 반경 원 생성
 
-            bus_cctv_Array = count_BUSSTOP_CCTV(latlng.getLat(), latlng.getLng());
+            bus_cctv_Array = count_BUSSTOP_CCTV_LIGHT(latlng.getLat(), latlng.getLng());
             Tra = TRA_score(bus_cctv_Array);
             Safety = SAFETY_score(bus_cctv_Array);     
             

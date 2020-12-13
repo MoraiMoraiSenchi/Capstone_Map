@@ -1,11 +1,5 @@
-var score = [];
+a = 100;
 
-score[0] = 5;
-score[1] = 10;
+console.log(a--);
 
-var a = [];
-
-a[0] = 7;
-a[1] = 10;
-
-console.log(a[0]+ score[0]);
+console.log(a);

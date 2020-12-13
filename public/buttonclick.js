@@ -24,7 +24,10 @@ function Safety_Click(bcArr, Pub){
     if(bcArr[0] == undefined) 
         document.getElementById("count_p").innerText= "지도를 클릭해주세요\n";
     else 
-        document.getElementById("count_p").innerText= "주변에 CCTV가 " + (bcArr.length-bcArr[0]-1) + "개 있습니다\n" + "너무 가까운 술집이 " + Pub[1] + "개 있습니다";
+        document.getElementById("count_p").innerText= 
+        "주변에 CCTV가 " + bcArr[1] + "개 있습니다\n" +
+        "보안등이 " + (bcArr.length-bcArr[0]-bcArr[1]-2) + "개 있습니다\n" +
+        "너무 가까운 술집이 " + Pub[1] + "개 있습니다";
 
     return 2;
 }

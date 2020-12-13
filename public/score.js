@@ -6,7 +6,8 @@ function TRA_score(bcArr) // 교통성 점수 내는 함수
     
     for(i=1; i<index; i++)
     {
-        score += (100/bcArr[i]);
+        if(bcArr[i] < 200) score += 0.5;
+        else score += (100/bcArr[i]);
     }
 
     if(score > 5)
@@ -23,12 +24,21 @@ function SAFETY_score(bcArr)
 {    
     var score = 0;
     var i = 0;
-    var index = bcArr[0][0];
+    var index = bcArr[0]; // 버스 정류장 개수
+    var index2 = bcArr[1]; // CCTV
+
     
-    for(i=index+1; i<bcArr.length; i++)
+    for(i=2+index; i<2+index+index2; i++) // CCTV 개수만큼
     {
-        score += (75/bcArr[i]);
+        if(bcArr[i] < 100) score +=0.1;
+        else score += (50/bcArr[i]);
     }
+    console.log("CCTV 점수 : ", score);
+    for(i; i<bcArr.length; i++)
+    {
+        score += 0.05;
+    }
+    console.log("보안등 점수 : ",score)
     return score;
 }
 
